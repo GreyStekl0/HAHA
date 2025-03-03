@@ -8,61 +8,8 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
-
-@Serializable
-data class GeminiRequest(
-    val system_instruction: SystemInstruction,
-    val contents: List<Content>,
-    val generationConfig: GenerationConfig,
-) {
-    @Serializable
-    data class SystemInstruction(
-        val parts: List<Part>,
-    ) {
-        @Serializable
-        data class Part(
-            val text: String,
-        )
-    }
-
-    @Serializable
-    data class Content(
-        val parts: List<Part>,
-    ) {
-        @Serializable
-        data class Part(
-            val text: String,
-        )
-    }
-
-    @Serializable
-    data class GenerationConfig(
-        val response_mime_type: String,
-    )
-}
-
-@Serializable
-data class GeminiResponse(
-    val candidates: List<Candidate>,
-) {
-    @Serializable
-    data class Candidate(
-        val content: Content,
-    ) {
-        @Serializable
-        data class Content(
-            val parts: List<Part>,
-        ) {
-            @Serializable
-            data class Part(
-                val text: String?,
-            )
-        }
-    }
-}
 
 class GeminiApiClient(
     private val apiKey: String,
