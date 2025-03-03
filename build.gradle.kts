@@ -20,6 +20,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
     implementation("org.slf4j:slf4j-simple:2.0.12")
+    implementation("dnsjava:dnsjava:3.6.3")
 }
 
 tasks.test {

@@ -10,6 +10,7 @@ import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import okhttp3.OkHttpClient
 
 @Serializable
 data class GeminiRequest(
@@ -65,9 +66,19 @@ data class GeminiResponse(
 
 class GeminiApiClient(
     private val apiKey: String,
+    private val dnsServer: String? = null,
 ) {
     private val client =
         HttpClient(OkHttp) {
+            engine {
+                if (dnsServer != null) {
+                    preconfigured =
+                        OkHttpClient
+                            .Builder()
+                            .dns(CustomDns(dnsServer))
+                            .build()
+                }
+            }
             install(ContentNegotiation) {
                 json(
                     Json {
