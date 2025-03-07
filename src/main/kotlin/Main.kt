@@ -1,6 +1,6 @@
 suspend fun main() {
     val apiKey = System.getenv("API_KEY")
-    val dnsServerAddress = "83.220.169.155"
+    val dnsServerAddress = "83.220.169.155" // Comss.one DNS
     val geminiClient = GeminiApiClient(apiKey, dnsServerAddress)
     val prompt =
         "- Штирлиц, а почему у Вас шесть пальцев? - вкрадчиво поинтересовался Мюллер.\n" +

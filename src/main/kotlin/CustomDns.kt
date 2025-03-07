@@ -39,7 +39,7 @@ class CustomDns(
             }
 
             return result.ifEmpty { systemDns.lookup(hostname) }
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             return systemDns.lookup(hostname)
         }
     }
