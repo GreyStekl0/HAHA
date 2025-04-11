@@ -9,9 +9,11 @@ import io.ktor.server.response.respondText
 import io.ktor.server.routing.application
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import org.slf4j.LoggerFactory
 import kotlin.system.exitProcess
 
 lateinit var geminiClient: GeminiApiClient
+private val logger = LoggerFactory.getLogger("Main")
 
 fun main() {
     val apiKey = System.getenv("API_KEY")
@@ -26,8 +28,7 @@ fun main() {
     try {
         geminiClient = GeminiApiClient(apiKey, dnsServerAddress)
     } catch (e: Exception) {
-        println("Критическая ошибка инициализации Gemini клиента: ${e.message}")
-        e.printStackTrace()
+        logger.error("Критическая ошибка инициализации Gemini клиента: ${e.message}")
         exitProcess(1)
     }
 
@@ -88,9 +89,8 @@ fun Application.module() {
         try {
             geminiClient.close()
         } catch (e: Exception) {
-            println("Ошибка при закрытии Gemini клиента: ${e.message}")
-            e.printStackTrace()
+            log.error("Ошибка при закрытии Gemini клиента: ${e.message}", e)
         }
-        println("Gemini Client закрыт.")
+        log.info("Gemini Client закрыт.")
     }
 }
