@@ -2,6 +2,7 @@ plugins {
     kotlin("jvm") version "2.1.10"
     id("io.ktor.plugin") version "3.1.1"
     kotlin("plugin.serialization") version "2.1.10"
+    application
 }
 
 group = "com.github.stekl0"
@@ -28,4 +29,14 @@ tasks.test {
 }
 kotlin {
     jvmToolchain(23)
+}
+
+val apiKeyFromGradleProps: Provider<String> = providers.gradleProperty("apiKeyGemini")
+
+application {
+    mainClass.set("MainKt")
+}
+
+tasks.named<JavaExec>("run") {
+    environment("API_KEY", apiKeyFromGradleProps.get())
 }
