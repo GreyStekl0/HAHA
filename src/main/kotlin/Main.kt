@@ -24,7 +24,6 @@ fun main() {
 
     // Инициализируем клиент один раз при старте
     try {
-        // Используйте ваш реальный конструктор
         geminiClient = GeminiApiClient(apiKey, dnsServerAddress)
     } catch (e: Exception) {
         println("Критическая ошибка инициализации Gemini клиента: ${e.message}")
