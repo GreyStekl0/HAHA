@@ -1,3 +1,5 @@
+package data.remote.dto
+
 import kotlinx.serialization.Serializable
 
 @Serializable

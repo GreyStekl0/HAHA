@@ -1,3 +1,5 @@
+package data.remote.util
+
 import okhttp3.Dns
 import org.xbill.DNS.AAAARecord
 import org.xbill.DNS.ARecord
