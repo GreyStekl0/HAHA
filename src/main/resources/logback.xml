@@ -1,0 +1,46 @@
+<configuration>
+    <!-- Путь к файлам логов -->
+    <property name="LOGS_PATH" value="logs"/>
+
+    <!-- Аппендер для вывода в консоль -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Аппендер для записи в ротируемый файл -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_PATH}/app.log</file> <!-- Основной файл логов -->
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex</pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Ротация файлов ежедневно -->
+            <fileNamePattern>${LOGS_PATH}/archived/app.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Хранить историю логов 7 дней -->
+            <maxHistory>7</maxHistory>
+            <!-- Максимальный общий размер архивов (опционально) -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Настройка уровней для пакетов -->
+    <logger name="data" level="DEBUG"/>
+    <logger name="di" level="INFO"/>
+    <logger name="domain" level="INFO"/>
+    <logger name="server" level="DEBUG"/>
+
+    <!-- Настройка уровней для специфичных логгеров -->
+    <logger name="io.ktor" level="INFO"/>
+    <logger name="io.netty" level="WARN"/>
+    <logger name="org.koin" level="INFO"/>
+
+    <!-- Корневой логгер -->
+    <root level="INFO"> <!-- Уровень по умолчанию -->
+        <appender-ref ref="STDOUT"/> <!-- Пишем в консоль -->
+        <appender-ref ref="FILE"/>   <!-- И пишем в файл -->
+    </root>
+
+</configuration>
