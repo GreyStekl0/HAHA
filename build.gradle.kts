@@ -21,8 +21,11 @@ dependencies {
     implementation("io.ktor:ktor-client-content-negotiation")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
-    implementation("org.slf4j:slf4j-simple:2.0.17")
     implementation("dnsjava:dnsjava:3.6.3")
+    implementation(platform("io.insert-koin:koin-bom:4.0.4"))
+    implementation("io.insert-koin:koin-ktor")
+    implementation("io.insert-koin:koin-logger-slf4j")
+    implementation("ch.qos.logback:logback-classic:1.5.18")
 }
 
 tasks.test {
