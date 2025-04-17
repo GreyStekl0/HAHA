@@ -181,7 +181,7 @@
         submitBtn.addEventListener('click', analyzeJoke);
 
         // Обработчик нажатия Enter в поле ввода
-        inputField.addEventListener('keydown', function(event) {
+        inputField.addEventListener('keydown', function (event) {
             // Если нажат Enter без Shift
             if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault(); // Отменяем стандартное действие (перенос строки)

@@ -26,8 +26,8 @@ private val appLogger = LoggerFactory.getLogger("di.AppModuleKt")
  */
 val appModule =
     module {
-        single { 
-            System.getenv("API_KEY") ?: error("API_KEY environment variable not set") 
+        single {
+            System.getenv("API_KEY") ?: error("API_KEY environment variable not set")
         }
 
         single<Json> {
