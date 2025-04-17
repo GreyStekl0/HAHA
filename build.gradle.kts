@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.github.stekl0"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -40,6 +40,31 @@ kotlin {
 
 application {
     mainClass.set("server.ApplicationKt")
+}
+
+ktor {
+    docker {
+        jreVersion.set(JavaVersion.VERSION_21)
+        localImageName.set("haha-app")
+        imageTag.set("${project.version}")
+        portMappings.set(
+            listOf(
+                io.ktor.plugin.features.DockerPortMapping(
+                    80,
+                    80,
+                    io.ktor.plugin.features.DockerPortMappingProtocol.TCP
+                )
+            )
+        )
+        environmentVariable(
+            "API_KEY",
+            providers.environmentVariable("API_KEY").get()
+        )
+        environmentVariable(
+            "DNS_SERVER",
+            providers.environmentVariable("DNS_SERVER").get()
+        )
+    }
 }
 
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {

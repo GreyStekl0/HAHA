@@ -1,9 +1,0 @@
-build/
-.gradle/
-gradle/
-.idea/
-.kotlin/
-logs
-Dockerfile
-.dockerignore
-.gitignore
