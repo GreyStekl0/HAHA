@@ -79,7 +79,7 @@ docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:80 haha-a
   - `logback.xml` — конфигурация логирования
 
 ## Авторы
-- [stekl0](https://github.com/stekl0) (backend)
+- [Stekl0](https://github.com/stekl0) (backend)
 - [Kira Arensky](https://github.com/KiraArensky) (frontend)
 
 ---
