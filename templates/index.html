@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H.A.H.A. - Анализатор анекдотов</title>
+    <link rel="stylesheet" href="..//static/style.css">
+</head>
+<body>
+<div class="logo-container">
+    <div class="logo">H.A.H.A.</div>
+    <div class="logo-full">Humor Analysis via Human-like AI</div>
+</div>
+
+<div class="container">
+    <h1><span class="emoji">😂</span>Анализатор анекдотов<span class="emoji">🤣</span></h1>
+
+    <div class="input-section">
+        <label class="input-label">Введите свой анекдот:</label>
+        <textarea class="textarea-field" placeholder="Расскажите смешную историю или анекдот..."></textarea>
+        <button class="submit-btn">Проанализировать</button>
+    </div>
+
+    <div class="progress-section" id="progressSection">
+        <div class="progress-container">
+            <div class="progress-label">
+                <span><span class="emoji">😆</span>Смешной фактор</span>
+                <span class="progress-percent-1">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-fill-1" id="progressFill1"></div>
+            </div>
+            <div class="progress-description description-1">
+                Измеряет уровень юмора от "Не смешно" до "Можно падать со стула от смеха"
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">
+                <span><span class="emoji">🧠</span>Оригинальность</span>
+                <span class="progress-percent-2">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-fill-2" id="progressFill2"></div>
+            </div>
+            <div class="progress-description description-2">
+                Определяет, насколько свежая идея, от "Бородатый анекдот" до "Никогда такого не слышал!"
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-label">
+                <span><span class="emoji">👨‍👩‍👧‍👦</span>Универсальность</span>
+                <span class="progress-percent-3">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill progress-fill-3" id="progressFill3"></div>
+            </div>
+            <div class="progress-description description-3">
+                Показывает, сколько людей оценят шутку, от "Только для узкого круга" до "Рассмешит каждого"
+            </div>
+        </div>
+
+        <div class="summary-section" id="summarySection">
+            <div class="summary-title"><span class="emoji">🏆</span>Итоговый анализ<span class="emoji">🏆</span></div>
+            <div class="summary-text" id="summaryText"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const submitBtn = document.querySelector('.submit-btn');
+        const inputField = document.querySelector('.textarea-field');
+        const progressSection = document.querySelector('.progress-section');
+        const progressFill1 = document.getElementById('progressFill1');
+        const progressFill2 = document.getElementById('progressFill2');
+        const progressFill3 = document.getElementById('progressFill3');
+        const progressPercent1 = document.querySelector('.progress-percent-1');
+        const progressPercent2 = document.querySelector('.progress-percent-2');
+        const progressPercent3 = document.querySelector('.progress-percent-3');
+        const summarySection = document.getElementById('summarySection');
+        const summaryText = document.getElementById('summaryText');
+
+        // Забавные фразы для пустого ввода
+        const emptyInputMessages = [
+            "Без анекдота я не могу определить, насколько это смешно! 🤔",
+            "Даже ИИ нужен материал для анализа. Напишите что-нибудь! 🧐",
+            "Тишина может быть золотом, но не для анализатора анекдотов! 😅",
+            "Пустая шутка = нулевая оценка. Логично, правда? 🤷‍♂️",
+            "Даже самый короткий анекдот состоит хотя бы из нескольких слов! 📝"
+        ];
+
+        // Забавные итоговые анализы
+        const funnyAnalyses = [
+            "eifefefe"
+        ]
+
+        function getRandomPercentage(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        submitBtn.addEventListener('click', function () {
+            if (inputField.value.trim() === '') {
+                // Выбираем случайное сообщение для пустого ввода
+                const randomMessage = emptyInputMessages[Math.floor(Math.random() * emptyInputMessages.length)];
+                alert(randomMessage);
+                return;
+            }
+
+            // Показываем секцию с прогресс-барами
+            progressSection.style.display = 'block';
+            summarySection.style.display = 'none';
+
+            // Сбрасываем прогресс-бары
+            progressFill1.style.width = '0%';
+            progressFill2.style.width = '0%';
+            progressFill3.style.width = '0%';
+            progressPercent1.textContent = '0%';
+            progressPercent2.textContent = '0%';
+            progressPercent3.textContent = '0%';
+
+            // Добавляем небольшую задержку для эффекта
+            setTimeout(function () {
+                const jokeLength = inputField.value.trim().length;
+
+                let funnyFactor, originalityFactor, universalityFactor;
+
+                funnyFactor = getRandomPercentage(20, 70); //фанни фактор процентики
+                originalityFactor = getRandomPercentage(30, 60); //оригинальность фактор процентики
+                universalityFactor = getRandomPercentage(40, 80); //универсал фактор процентики
+
+
+                // Анимация первого прогресс-бара
+                setTimeout(function () {
+                    progressFill1.style.width = funnyFactor + '%';
+                    progressPercent1.textContent = funnyFactor + '%';
+                }, 500);
+
+                // Анимация второго прогресс-бара
+                setTimeout(function () {
+                    progressFill2.style.width = originalityFactor + '%';
+                    progressPercent2.textContent = originalityFactor + '%';
+                }, 1500);
+
+                // Анимация третьего прогресс-бара
+                setTimeout(function () {
+                    progressFill3.style.width = universalityFactor + '%';
+                    progressPercent3.textContent = universalityFactor + '%';
+
+                    // Показываем итоговый анализ после заполнения всех прогресс-баров
+                    setTimeout(function () {
+                        const randomAnalysis = funnyAnalyses[Math.floor(Math.random() * funnyAnalyses.length)];
+
+                        // Добавляем рекомендацию на основе показателей
+                        let recommendation = "";
+
+                        if (funnyFactor < 50) {
+                            recommendation = " Попробуйте добавить неожиданный поворот в конце, это обычно повышает смехофактор!";
+                        } else if (originalityFactor < 50) {
+                            recommendation = " Для большей оригинальности, попробуйте изменить контекст или персонажей в анекдоте.";
+                        } else if (universalityFactor < 50) {
+                            recommendation = " Чтобы сделать анекдот более универсальным, избегайте слишком специфичных отсылок.";
+                        }
+
+                        // Итоговая оценка
+                        const overallScore = Math.floor((funnyFactor + originalityFactor + universalityFactor) / 3);
+                        let rating;
+
+                        if (overallScore < 40) {
+                            rating = "😐 Нужно доработать";
+                        } else if (overallScore < 60) {
+                            rating = "🙂 Нормально";
+                        } else if (overallScore < 80) {
+                            rating = "😄 Хорошо!";
+                        } else {
+                            rating = "🤣 Великолепно!";
+                        }
+
+                        summaryText.innerHTML = `<strong>${rating}</strong> — ${randomAnalysis}${recommendation} <br><br>Общая оценка: <strong>${overallScore}%</strong>`;
+                        summarySection.style.display = 'block';
+
+                        // Автоматический скролл к итоговому анализу
+                        summarySection.scrollIntoView({behavior: 'smooth', block: 'start'});
+                    }, 500);
+                }, 2500);
+            }, 300);
+        });
+    });
+</script>
+</body>
+</html>
