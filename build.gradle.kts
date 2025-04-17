@@ -62,14 +62,6 @@ ktor {
                 )
             )
         )
-        environmentVariable(
-            "API_KEY",
-            providers.environmentVariable("API_KEY").get()
-        )
-        environmentVariable(
-            "DNS_SERVER",
-            providers.environmentVariable("DNS_SERVER").get()
-        )
     }
 }
 

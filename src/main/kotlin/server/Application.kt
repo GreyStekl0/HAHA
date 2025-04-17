@@ -9,6 +9,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
+import io.ktor.server.http.content.staticResources
 import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.statuspages.StatusPages
@@ -23,8 +24,7 @@ import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 import org.slf4j.LoggerFactory
-import java.io.File
-import io.ktor.server.http.content.staticFiles
+import java.io.InputStream
 
 private val logger = LoggerFactory.getLogger("server.ApplicationKt")
 
@@ -95,14 +95,15 @@ fun Application.configureRouting() {
     val evaluateJokeUseCase: EvaluateJokeUseCase by inject()
 
     routing {
-        // Статические файлы
-        staticFiles("/static", File("static"))
-        
+        // Статические файлы из resources/static
+        staticResources("/static", "static")
+
         // Главная страница
         get("/") {
-            val file = File("templates/index.html")
-            if (file.exists()) {
-                call.respondText(file.readText(), contentType = ContentType.Text.Html, status = HttpStatusCode.OK)
+            val resourceStream: InputStream? = this::class.java.classLoader.getResourceAsStream("templates/index.html")
+            if (resourceStream != null) {
+                val content = resourceStream.bufferedReader().use { it.readText() }
+                call.respondText(content, ContentType.Text.Html, HttpStatusCode.OK)
             } else {
                 call.respondText("Файл index.html не найден", status = HttpStatusCode.NotFound)
             }
@@ -110,14 +111,9 @@ fun Application.configureRouting() {
 
         // API эндпоинт
         get("/api/evaluate") {
-            // Переименовал для ясности
-            // Получаем joke из query параметра URL (?joke=текст)
             val jokePrompt = call.request.queryParameters["joke"]
-
             require(!jokePrompt.isNullOrBlank()) { "Параметр 'joke' обязателен и не должен быть пустым." }
-
             val evaluationResult: JokeEvaluation = evaluateJokeUseCase.execute(jokePrompt)
-
             call.respond(HttpStatusCode.OK, evaluationResult)
         }
     }
