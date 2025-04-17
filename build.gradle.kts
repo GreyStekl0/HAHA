@@ -24,7 +24,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
-    implementation("dnsjava:dnsjava:3.4.3")
+    implementation("dnsjava:dnsjava:3.6.3")
     implementation(platform("io.insert-koin:koin-bom:4.0.4"))
     implementation("io.insert-koin:koin-ktor")
     implementation("io.insert-koin:koin-logger-slf4j")
@@ -45,6 +45,10 @@ application {
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     archiveFileName.set("haha-app.jar")
     mergeServiceFiles()
+    isZip64 = true
+    manifest {
+        attributes("Multi-Release" to "true")
+    }
 }
 
 tasks {
