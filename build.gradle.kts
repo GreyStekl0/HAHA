@@ -3,6 +3,7 @@ plugins {
     id("io.ktor.plugin") version "3.1.2"
     kotlin("plugin.serialization") version "2.1.20"
     application
+    id("com.gradleup.shadow") version "8.3.5"
 }
 
 group = "com.github.stekl0"
@@ -23,7 +24,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
-    implementation("dnsjava:dnsjava:3.6.3")
+    implementation("dnsjava:dnsjava:3.4.3")
     implementation(platform("io.insert-koin:koin-bom:4.0.4"))
     implementation("io.insert-koin:koin-ktor")
     implementation("io.insert-koin:koin-logger-slf4j")
@@ -39,4 +40,18 @@ kotlin {
 
 application {
     mainClass.set("server.ApplicationKt")
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveFileName.set("haha-app.jar")
+    mergeServiceFiles()
+}
+
+tasks {
+    named<Jar>("jar") {
+        enabled = false
+    }
+    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
+        enabled = true
+    }
 }
