@@ -31,6 +31,12 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.5.18")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
+    }
+}
+
 tasks.test {
     useJUnitPlatform()
 }
