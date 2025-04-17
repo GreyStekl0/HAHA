@@ -53,15 +53,6 @@ ktor {
         jreVersion.set(JavaVersion.VERSION_21)
         localImageName.set("haha-app")
         imageTag.set("${project.version}")
-        portMappings.set(
-            listOf(
-                io.ktor.plugin.features.DockerPortMapping(
-                    80,
-                    80,
-                    io.ktor.plugin.features.DockerPortMappingProtocol.TCP
-                )
-            )
-        )
     }
 }
 
