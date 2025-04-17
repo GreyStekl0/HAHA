@@ -2,6 +2,7 @@ package di
 
 import data.gateway.AiEvaluatorGateway
 import data.gateway.GeminiAiEvaluator
+import data.gateway.MockAiEvaluator
 import data.remote.util.CustomDns
 import data.usecase.EvaluateJokeUseCaseImpl
 import domain.usecase.EvaluateJokeUseCase
@@ -26,8 +27,14 @@ private val appLogger = LoggerFactory.getLogger("di.AppModuleKt")
  */
 val appModule =
     module {
+        // Используем заглушку вместо реального API-ключа
         single { 
-            System.getenv("API_KEY") ?: error("API_KEY environment variable not set") 
+            try {
+                System.getenv("API_KEY") ?: "dummy_api_key" 
+            } catch (e: Exception) {
+                appLogger.warn("Используется фиктивный API ключ")
+                "dummy_api_key"
+            }
         }
 
         single<Json> {
@@ -79,8 +86,9 @@ val appModule =
         }
 
         // --- Шлюз данных ---
-        singleOf(::GeminiAiEvaluator) bind AiEvaluatorGateway::class
+        // Используем заглушку вместо реального API
+        singleOf(::MockAiEvaluator) bind AiEvaluatorGateway::class
 
         // --- Use Case ---
         singleOf(::EvaluateJokeUseCaseImpl) bind EvaluateJokeUseCase::class
-    }
+    } 

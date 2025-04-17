@@ -3,6 +3,7 @@ package server
 import di.appModule
 import domain.entities.JokeEvaluation
 import domain.usecase.EvaluateJokeUseCase
+import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -22,6 +23,8 @@ import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 import org.koin.logger.slf4jLogger
 import org.slf4j.LoggerFactory
+import java.io.File
+import io.ktor.server.http.content.staticFiles
 
 private val logger = LoggerFactory.getLogger("server.ApplicationKt")
 
@@ -92,8 +95,17 @@ fun Application.configureRouting() {
     val evaluateJokeUseCase: EvaluateJokeUseCase by inject()
 
     routing {
+        // Статические файлы
+        staticFiles("/static", File("static"))
+        
+        // Главная страница
         get("/") {
-            call.respondText("Привет! Это API для оценки шуток Gemini. Используйте /api/evaluate?joke=...")
+            val file = File("templates/index.html")
+            if (file.exists()) {
+                call.respondText(file.readText(), contentType = ContentType.Text.Html, status = HttpStatusCode.OK)
+            } else {
+                call.respondText("Файл index.html не найден", status = HttpStatusCode.NotFound)
+            }
         }
 
         // API эндпоинт
