@@ -60,7 +60,6 @@ val appModule =
                 }
             } else {
                 appLogger.info("Используется системный DNS")
-                println("Используется системный DNS")
             }
             builder.build()
         }

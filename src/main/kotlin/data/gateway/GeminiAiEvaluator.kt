@@ -77,11 +77,11 @@ class GeminiAiEvaluator(
     private fun createSystemInstruction(): GeminiRequest.SystemInstruction =
         GeminiRequest.SystemInstruction(
             parts =
-                listOf(
-                    GeminiRequest.SystemInstruction.Part(
-                        text = GeminiConstants.SYSTEM_INSTRUCTION_TEXT,
-                    ),
+            listOf(
+                GeminiRequest.SystemInstruction.Part(
+                    text = GeminiConstants.SYSTEM_INSTRUCTION_TEXT,
                 ),
+            ),
         )
 
     /**
@@ -93,9 +93,9 @@ class GeminiAiEvaluator(
         listOf(
             GeminiRequest.Content(
                 parts =
-                    listOf(
-                        GeminiRequest.Content.Part(text = prompt),
-                    ),
+                listOf(
+                    GeminiRequest.Content.Part(text = prompt),
+                ),
             ),
         )
 
