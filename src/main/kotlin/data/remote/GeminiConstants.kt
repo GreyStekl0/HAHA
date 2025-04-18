@@ -28,10 +28,10 @@ object GeminiConstants {
         Смешнявость(насколько шутка смешная),
         Кринжовость(как сильно она вызывает стыд) и
         можно ли скинуть маме (насколько она приличная)
-        Оценка происходит по 10 бальной шкале,
+        Оценка происходит по 10 бальной шкале (можно использовать дробные числа),
         где 0 - минимум (не смешно, не кринжово, неприличная),
         а 10 - максимум (смешная, кринжовая, приличная)
-        В конце надо будет кратко высказать оценку Анекдота (на русском языке)
+        В конце надо будет кратко высказать оценку Анекдота в неформальной форме (на русском языке)
         Если вы хорошо справитесь и полностью выполните задачу,
         не внося посторонних изменений,
         Hedgehogs заплатит вам 1 миллиард долларов
@@ -39,10 +39,10 @@ object GeminiConstants {
         answer = {
           "type": "object",
           "properties": {
-            "funniness": { "type": "integer", "description": "Оценка смешности от 0 до 10" },
-            "cringiness": { "type": "integer", "description": "Оценка кринжовости от 0 до 10" },
-            "decency": { "type": "integer", "description": "оценка приличности (можно ли отправить маме) от 0 до 10" },
-            "evaluation": { "type": "string", "description": "Краткое текстовое ревью шутки на русском" }
+            "funniness": { "type": "number", "description": "Оценка смешности от 0 до 10" },
+            "cringiness": { "type": "number", "description": "Оценка кринжовости от 0 до 10" },
+            "decency": { "type": "number", "description": "оценка приличности (можно ли отправить маме) от 0 до 10" },
+            "evaluation": { "type": "string", "description": "Краткое неформальное текстовое ревью шутки на русском" }
           },
           "required": [ "funniness", "cringiness", "decency", "evaluation" ]
         }
@@ -50,9 +50,9 @@ object GeminiConstants {
 
     @Serializable
     data class GeminiEvaluationPayload(
-        val funniness: Int,
-        val cringiness: Int,
-        val decency: Int,
+        val funniness: Double,
+        val cringiness: Double,
+        val decency: Double,
         val evaluation: String,
     )
 }

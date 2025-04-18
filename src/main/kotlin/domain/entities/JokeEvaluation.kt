@@ -12,8 +12,8 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class JokeEvaluation(
-    val funniness: Int,
-    val cringiness: Int,
-    val decency: Int,
+    val funniness: Double,
+    val cringiness: Double,
+    val decency: Double,
     val evaluation: String,
 )
