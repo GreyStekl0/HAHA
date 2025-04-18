@@ -63,7 +63,6 @@ docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:80 haha-a
 ```
 ### или
 ```sh
-docker pull ghcr.io/greystekl0/haha:1.0.1
 docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:80 ghcr.io/greystekl0/haha:1.0.1 # DNS_SERVER опционально
 ```
 
