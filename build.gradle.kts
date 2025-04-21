@@ -3,7 +3,6 @@ plugins {
     id("io.ktor.plugin") version "3.1.2"
     kotlin("plugin.serialization") version "2.1.20"
     application
-    id("com.gradleup.shadow") version "8.3.5"
 }
 
 group = "com.github.stekl0"
@@ -14,14 +13,13 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
     implementation("io.ktor:ktor-client-core")
     implementation("io.ktor:ktor-client-okhttp")
     implementation("io.ktor:ktor-client-content-negotiation")
     implementation("io.ktor:ktor-server-status-pages")
-    implementation("io.ktor:ktor-server-content-negotiation-jvm")
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
+    implementation("io.ktor:ktor-server-content-negotiation")
+    implementation("io.ktor:ktor-server-core")
+    implementation("io.ktor:ktor-server-netty")
     implementation("io.ktor:ktor-serialization-kotlinx-json")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
     implementation("dnsjava:dnsjava:3.6.3")
@@ -29,6 +27,12 @@ dependencies {
     implementation("io.insert-koin:koin-ktor")
     implementation("io.insert-koin:koin-logger-slf4j")
     implementation("ch.qos.logback:logback-classic:1.5.18")
+    testImplementation("io.ktor:ktor-server-tests")
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
+    testImplementation("io.kotest:kotest-property:5.9.1")
+    testImplementation("io.mockk:mockk:1.14.0")
+    testImplementation("io.insert-koin:koin-test-junit5")
 }
 
 java {
@@ -37,7 +41,7 @@ java {
     }
 }
 
-tasks.test {
+tasks.withType<Test>().configureEach {
     useJUnitPlatform()
 }
 kotlin {
@@ -53,23 +57,5 @@ ktor {
         jreVersion.set(JavaVersion.VERSION_21)
         localImageName.set("haha-app")
         imageTag.set("${project.version}")
-    }
-}
-
-tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-    archiveFileName.set("haha-app.jar")
-    mergeServiceFiles()
-    isZip64 = true
-    manifest {
-        attributes("Multi-Release" to "true")
-    }
-}
-
-tasks {
-    named<Jar>("jar") {
-        enabled = false
-    }
-    named<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar>("shadowJar") {
-        enabled = true
     }
 }
