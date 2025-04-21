@@ -27,10 +27,12 @@ dependencies {
     implementation("io.insert-koin:koin-ktor")
     implementation("io.insert-koin:koin-logger-slf4j")
     implementation("ch.qos.logback:logback-classic:1.5.18")
-    testImplementation("io.ktor:ktor-server-tests")
+    testImplementation("io.ktor:ktor-server-test-host")
+    testImplementation("io.ktor:ktor-client-mock")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
     testImplementation("io.kotest:kotest-property:5.9.1")
+    testImplementation("io.kotest.extensions:kotest-assertions-ktor:2.0.0")
     testImplementation("io.mockk:mockk:1.14.0")
     testImplementation("io.insert-koin:koin-test-junit5")
 }
@@ -43,7 +45,9 @@ java {
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+    systemProperty("kotest.framework.classpath.scanning.autoscan.disable", "true")
 }
+
 kotlin {
     jvmToolchain(21)
 }
