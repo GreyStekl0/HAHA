@@ -1,3 +1,5 @@
+import io.ktor.plugin.features.DockerImageRegistry
+
 plugins {
     kotlin("jvm") version "2.1.20"
     id("io.ktor.plugin") version "3.1.2"
@@ -61,5 +63,15 @@ ktor {
         jreVersion.set(JavaVersion.VERSION_21)
         localImageName.set("haha-app")
         imageTag.set("${project.version}")
+
+        externalRegistry.set(
+            DockerImageRegistry.externalRegistry(
+                username = providers.environmentVariable("GHCR_USERNAME"),
+                password = providers.environmentVariable("GHCR_TOKEN"),
+                hostname = provider { "ghcr.io" },
+                namespace = provider { "greystekl0" },
+                project = provider { "haha" },
+            ),
+        )
     }
 }
