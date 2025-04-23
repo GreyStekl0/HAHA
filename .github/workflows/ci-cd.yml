@@ -64,13 +64,8 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Log in to GHCR
-        uses: docker/login-action@v2
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
+      - name: Pre-pull base image
+        run: docker pull eclipse-temurin:21-jre
 
       - name: Build and publish Docker image
         run: ./gradlew publishImage --no-daemon
