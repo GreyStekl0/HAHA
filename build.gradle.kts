@@ -1,4 +1,3 @@
-import com.google.cloud.tools.jib.gradle.JibExtension
 import io.ktor.plugin.features.DockerImageRegistry
 
 plugins {
@@ -57,23 +56,6 @@ kotlin {
 
 application {
     mainClass.set("server.ApplicationKt")
-}
-
-configure<JibExtension> {
-    from {
-        image = "eclipse-temurin:21-jre"
-        auth {
-            username = System.getenv("DOCKERHUB_USERNAME")
-            password = System.getenv("DOCKERHUB_TOKEN")
-        }
-    }
-    to {
-        image = "ghcr.io/greystekl0/haha"
-        auth {
-            username = System.getenv("GHCR_USERNAME")
-            password = System.getenv("GHCR_TOKEN")
-        }
-    }
 }
 
 ktor {
