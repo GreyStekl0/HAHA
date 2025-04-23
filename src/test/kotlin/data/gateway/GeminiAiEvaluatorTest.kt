@@ -93,13 +93,15 @@ class GeminiAiEvaluatorTest :
                                     ),
                             ),
                         ),
-                    generationConfig = GeminiRequest.GenerationConfig(response_mime_type = GeminiConstants.RESPONSE_MIME_TYPE),
+                    generationConfig =
+                        GeminiRequest.GenerationConfig(response_mime_type = GeminiConstants.RESPONSE_MIME_TYPE),
                 )
 
             val mockEngine =
                 MockEngine { request ->
                     request.method shouldBe HttpMethod.Post
-                    request.url.toString() shouldBe "${GeminiConstants.API_BASE_URL}?${GeminiConstants.API_KEY_PARAM}=$testApiKey"
+                    val correctUrl = "${GeminiConstants.API_BASE_URL}?${GeminiConstants.API_KEY_PARAM}=$testApiKey"
+                    request.url.toString() shouldBe correctUrl
 
                     val actualRequestBodyString =
                         request.body.toByteArray().decodeToString() // Читаем все байты и декодируем
