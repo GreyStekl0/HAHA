@@ -35,6 +35,8 @@ jobs:
     env:
       GHCR_USERNAME: ${{ github.actor }}
       GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
     outputs:
       app-version: ${{ steps.get-version.outputs.version }}
 
@@ -63,9 +65,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-
-      - name: Pre-pull base image
-        run: docker pull eclipse-temurin:21-jre
 
       - name: Build and publish Docker image
         run: ./gradlew publishImage --no-daemon
