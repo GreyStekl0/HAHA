@@ -66,6 +66,11 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Debug GHCR creds
+        run: |
+          echo "GHCR_USERNAME=$GHCR_USERNAME"
+          echo "GHCR_TOKEN=${GHCR_TOKEN:0:4}••••"
+
       - name: Build and publish Docker image
         run: ./gradlew publishImage --no-daemon
 
