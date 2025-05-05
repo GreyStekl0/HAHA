@@ -16,6 +16,71 @@ body {
     align-items: center;
     justify-content: center;
     background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f8e1a6' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    transition: background-color 0.5s ease, background-image 0.5s ease;
+}
+
+/* Кнопка переключения темы */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+}
+
+.theme-toggle button {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #ff6b6b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle button:active {
+    transform: scale(0.95);
+}
+
+.theme-icon {
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+.light-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.dark-icon {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+body.dark-mode .light-icon {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+body.dark-mode .dark-icon {
+    opacity: 1;
+    transform: scale(1);
+}
+
+body.dark-mode .theme-toggle button {
+    background-color: #1a1a22;
+    color: #e0e0ef;
+    border-color: #fa6d5a;
 }
 
 .logo-container {
@@ -30,12 +95,14 @@ body {
     text-shadow: 2px 2px 0 #ffd166;
     letter-spacing: 5px;
     margin-bottom: 5px;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
 .logo-full {
     font-size: 1rem;
     color: #555;
     font-style: italic;
+    transition: color 0.5s ease;
 }
 
 .container {
@@ -46,6 +113,7 @@ body {
     padding: 25px;
     box-shadow: 0 5px 0 #ffa500, 0 10px 15px rgba(0, 0, 0, 0.1);
     border: 2px solid #ff6b6b;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
 }
 
 h1 {
@@ -54,6 +122,7 @@ h1 {
     color: #ff6b6b;
     font-size: 2rem;
     text-shadow: 1px 1px 0 #ffd166;
+    transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
 .input-section {
@@ -66,6 +135,7 @@ h1 {
     font-size: 18px;
     font-weight: bold;
     color: #333;
+    transition: color 0.5s ease;
 }
 
 .textarea-field {
@@ -79,6 +149,7 @@ h1 {
     box-shadow: inset 2px 2px 3px rgba(0, 0, 0, 0.1);
     min-height: 120px;
     resize: vertical;
+    transition: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .submit-btn {
@@ -123,6 +194,7 @@ h1 {
     margin-bottom: 8px;
     font-weight: bold;
     font-size: 16px;
+    transition: color 0.5s ease;
 }
 
 .progress-bar {
@@ -133,6 +205,7 @@ h1 {
     overflow: hidden;
     border: 2px solid #ddd;
     box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .progress-fill {
@@ -180,6 +253,7 @@ h1 {
     border-radius: 8px;
     border-left: 3px solid;
     font-style: italic;
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .description-1 {
@@ -201,6 +275,7 @@ h1 {
     background-color: #f8f9fa;
     border-radius: 10px;
     border: 1px solid #ddd;
+    transition: background-color 0.5s ease, border-color 0.5s ease;
 }
 
 .summary-title {
@@ -208,12 +283,14 @@ h1 {
     color: #333;
     margin-bottom: 15px;
     text-align: center;
+    transition: color 0.5s ease;
 }
 
 .summary-text {
     font-size: 16px;
     line-height: 1.5;
     color: #444;
+    transition: color 0.5s ease;
 }
 
 .emoji {
@@ -222,8 +299,224 @@ h1 {
     display: inline-block;
 }
 
+/* Стили для темной темы */
+body.dark-mode {
+    background-color: #0f0f13;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231f1f27' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+body.dark-mode .logo {
+    color: #fa6d5a;
+    text-shadow: 2px 2px 0 #aa3a2a, 0 0 15px rgba(255, 107, 107, 0.2);
+}
+
+body.dark-mode .logo-full {
+    color: #b3b3cc;
+}
+
+body.dark-mode .container {
+    background-color: #1a1a22;
+    box-shadow: 0 5px 0 #fa6d5a, 0 10px 20px rgba(0, 0, 0, 0.35);
+    border: 2px solid #fa6d5a;
+}
+
+body.dark-mode h1 {
+    color: #fa6d5a;
+    text-shadow: 1px 1px 0 #aa3a2a, 0 0 10px rgba(255, 107, 107, 0.2);
+}
+
+body.dark-mode .input-label {
+    color: #e0e0ef;
+}
+
+body.dark-mode .textarea-field {
+    background-color: #23232d;
+    color: #e0e0ef;
+    border-color: #3f4f6b;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .textarea-field:focus {
+    border-color: #5c7fc7;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(92, 127, 199, 0.4);
+    outline: none;
+}
+
+body.dark-mode .textarea-field::placeholder {
+    color: #6f7285;
+}
+
+body.dark-mode .submit-btn {
+    background-color: #5c7fc7;
+    box-shadow: 0 3px 0 #3a5a9f;
+}
+
+body.dark-mode .submit-btn:hover {
+    background-color: #4a6db5;
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #3a5a9f;
+    animation: pulse-dark 2s infinite;
+}
+
+body.dark-mode .submit-btn:active {
+    transform: translateY(3px);
+    box-shadow: none;
+    background-color: #3a5a9f;
+}
+
+body.dark-mode .progress-label {
+    color: #b3b3cc;
+}
+
+body.dark-mode .progress-bar {
+    background-color: #23232d;
+    border-color: #3f4f6b;
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .progress-fill-1 {
+    background: linear-gradient(to right, #c165dd, #e66aed);
+}
+
+body.dark-mode .progress-fill-2 {
+    background: linear-gradient(to right, #f8b94a, #ffce44);
+}
+
+body.dark-mode .progress-fill-3 {
+    background: linear-gradient(to right, #4778d9, #49aeff);
+}
+
+body.dark-mode .progress-fill::after {
+    background: repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.1) 10px,
+            rgba(255, 255, 255, 0) 10px,
+            rgba(255, 255, 255, 0) 20px
+    );
+}
+
+body.dark-mode .progress-description {
+    background-color: #23232d;
+    color: #a0a0b8;
+}
+
+body.dark-mode .description-1 {
+    border-left-color: #e66aed;
+}
+
+body.dark-mode .description-2 {
+    border-left-color: #ffce44;
+}
+
+body.dark-mode .description-3 {
+    border-left-color: #49aeff;
+}
+
+body.dark-mode .summary-section {
+    background-color: #23232d;
+    border: 1px solid #3f4f6b;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .summary-title {
+    color: #e0e0ef;
+}
+
+body.dark-mode .summary-text {
+    color: #b3b3cc;
+}
+
+body.dark-mode .summary-text strong {
+    color: #ffffff;
+}
+
+body.dark-mode .emoji {
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+}
+
+/* Анимация пульсации для кнопки в темной теме */
+@keyframes pulse-dark {
+    0% {
+        box-shadow: 0 3px 0 #3a5a9f, 0 0 0 rgba(92, 127, 199, 0);
+    }
+    70% {
+        box-shadow: 0 3px 0 #3a5a9f, 0 0 10px rgba(92, 127, 199, 0.3);
+    }
+    100% {
+        box-shadow: 0 3px 0 #3a5a9f, 0 0 0 rgba(92, 127, 199, 0);
+    }
+}
+
+.footer {
+    text-align: center;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 3px 0 #ffa500, 0 5px 10px rgba(0, 0, 0, 0.08);
+    border: 2px solid #ff6b6b;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease, border 0.5s ease;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+    transition: color 0.5s ease;
+}
+
+.footer a {
+    color: #74c7fa;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.footer a:hover {
+    color: #5fb8f5;
+    text-decoration: underline;
+}
+
+.footer a::after {
+    margin-left: 5px;
+    font-size: 14px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Для темной темы */
+body.dark-mode .footer {
+    background-color: #1a1a22;
+    box-shadow: 0 3px 0 #fa6d5a, 0 5px 10px rgba(0, 0, 0, 0.3);
+    border: 2px solid #fa6d5a;
+}
+
+body.dark-mode .footer p {
+    color: #b3b3cc;
+}
+
+body.dark-mode .footer a {
+    color: #5c7fc7;
+}
+
+body.dark-mode .footer a:hover {
+    color: #4a6db5;
+}
+
 /* Для мобильных устройств */
 @media (max-width: 480px) {
+    .footer {
+        padding: 12px;
+        margin-top: 20px;
+    }
+
+    .footer p {
+        font-size: 14px;
+    }
     .container {
         padding: 15px;
     }
@@ -246,6 +539,17 @@ h1 {
 
     .submit-btn {
         font-size: 16px;
+    }
+
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+    }
+
+    .theme-toggle button {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
     }
 }
 
@@ -275,168 +579,5 @@ h1 {
 @media (min-width: 1025px) {
     .container {
         max-width: 600px;
-    }
-}
-
-/* Для темного режима - полностью улучшенная версия */
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: #0f0f13;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231f1f27' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    }
-
-    .container {
-        background-color: #1a1a22;
-        box-shadow: 0 5px 0 #fa6d5a, 0 10px 20px rgba(0, 0, 0, 0.35);
-        border: 2px solid #fa6d5a;
-    }
-
-    .logo-container {
-        text-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
-    }
-
-    .logo {
-        color: #fa6d5a;
-        text-shadow: 2px 2px 0 #aa3a2a, 0 0 15px rgba(255, 107, 107, 0.2);
-    }
-
-    .logo-full {
-        color: #b3b3cc;
-    }
-
-    h1 {
-        color: #fa6d5a;
-        text-shadow: 1px 1px 0 #aa3a2a, 0 0 10px rgba(255, 107, 107, 0.2);
-    }
-
-    .input-label {
-        color: #e0e0ef;
-    }
-
-    .textarea-field {
-        background-color: #23232d;
-        color: #e0e0ef;
-        border-color: #3f4f6b;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-    }
-
-    .textarea-field:focus {
-        border-color: #5c7fc7;
-        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(92, 127, 199, 0.4);
-        outline: none;
-    }
-
-    .textarea-field::placeholder {
-        color: #6f7285;
-    }
-
-    .submit-btn {
-        background-color: #5c7fc7;
-        box-shadow: 0 3px 0 #3a5a9f;
-        transition: all 0.3s ease;
-    }
-
-    .submit-btn:hover {
-        background-color: #4a6db5;
-        transform: translateY(1px);
-        box-shadow: 0 2px 0 #3a5a9f;
-    }
-
-    .submit-btn:active {
-        transform: translateY(3px);
-        box-shadow: none;
-        background-color: #3a5a9f;
-    }
-
-    .progress-bar {
-        background-color: #23232d;
-        border-color: #3f4f6b;
-        box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3);
-    }
-
-    .progress-label {
-        color: #b3b3cc;
-    }
-
-    .progress-fill-1 {
-        background: linear-gradient(to right, #c165dd, #e66aed);
-    }
-
-    .progress-fill-2 {
-        background: linear-gradient(to right, #f8b94a, #ffce44);
-    }
-
-    .progress-fill-3 {
-        background: linear-gradient(to right, #4778d9, #49aeff);
-    }
-
-    .progress-fill::after {
-        background: repeating-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.1),
-            rgba(255, 255, 255, 0.1) 10px,
-            rgba(255, 255, 255, 0) 10px,
-            rgba(255, 255, 255, 0) 20px
-        );
-    }
-
-    .progress-description {
-        background-color: #23232d;
-        color: #a0a0b8;
-        border-radius: 8px;
-        border-left: 3px solid;
-    }
-
-    .description-1 {
-        border-left-color: #e66aed;
-    }
-
-    .description-2 {
-        border-left-color: #ffce44;
-    }
-
-    .description-3 {
-        border-left-color: #49aeff;
-    }
-
-    .summary-section {
-        background-color: #23232d;
-        border: 1px solid #3f4f6b;
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .summary-title {
-        color: #e0e0ef;
-    }
-
-    .summary-text {
-        color: #b3b3cc;
-    }
-
-    .summary-text strong {
-        color: #ffffff;
-    }
-
-    /* Добавляем стили для эмодзи, чтобы они выделялись в темной теме */
-    .emoji {
-        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
-    }
-
-    /* Анимация пульсации для кнопки в темной теме */
-    @keyframes pulse-dark {
-        0% {
-            box-shadow: 0 3px 0 #3a5a9f, 0 0 0 rgba(92, 127, 199, 0);
-        }
-        70% {
-            box-shadow: 0 3px 0 #3a5a9f, 0 0 10px rgba(92, 127, 199, 0.3);
-        }
-        100% {
-            box-shadow: 0 3px 0 #3a5a9f, 0 0 0 rgba(92, 127, 199, 0);
-        }
-    }
-
-    .submit-btn:hover {
-        animation: pulse-dark 2s infinite;
     }
 }

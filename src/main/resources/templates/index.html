@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
+<div class="theme-toggle">
+    <button id="themeToggleBtn" aria-label="Переключить тему">
+        <span class="theme-icon light-icon">☀️</span>
+        <span class="theme-icon dark-icon">🌙</span>
+    </button>
+</div>
+
 <div class="logo-container">
     <div class="logo">H.A.H.A.</div>
     <div class="logo-full">Humor Analysis via Human-like AI</div>
@@ -68,6 +75,11 @@
     </div>
 </div>
 
+<div class="footer">
+    <p><strong>created by Hedgehogs</strong></p>
+    <p>Лучший бот для создания мемов: <a href="https://t.me/createyourmem_bot" target="_blank">t.me/createyourmem_bot</a></p>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const submitBtn = document.querySelector('.submit-btn');
@@ -81,6 +93,24 @@
         const progressPercent3 = document.querySelector('.progress-percent-3');
         const summarySection = document.getElementById('summarySection');
         const summaryText = document.getElementById('summaryText');
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+
+        // Проверка сохраненной темы и настройка
+        if (localStorage.getItem('darkMode') === 'true') {
+            document.body.classList.add('dark-mode');
+        }
+
+        // Переключение темы при клике на кнопку
+        themeToggleBtn.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+
+            // Сохраняем настройки в localStorage
+            if (document.body.classList.contains('dark-mode')) {
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                localStorage.setItem('darkMode', 'false');
+            }
+        });
 
         // Забавные фразы для пустого ввода
         const emptyInputMessages = [
