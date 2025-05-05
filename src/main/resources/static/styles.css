@@ -278,52 +278,165 @@ h1 {
     }
 }
 
-/* Для темного режима */
+/* Для темного режима - полностью улучшенная версия */
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #222;
-        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23333' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        background-color: #0f0f13;
+        background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231f1f27' fill-opacity='0.5'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
     }
 
     .container {
-        background-color: #333;
-        box-shadow: 0 5px 0 #ad7200, 0 10px 15px rgba(0, 0, 0, 0.2);
+        background-color: #1a1a22;
+        box-shadow: 0 5px 0 #fa6d5a, 0 10px 20px rgba(0, 0, 0, 0.35);
+        border: 2px solid #fa6d5a;
+    }
+
+    .logo-container {
+        text-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+    }
+
+    .logo {
+        color: #fa6d5a;
+        text-shadow: 2px 2px 0 #aa3a2a, 0 0 15px rgba(255, 107, 107, 0.2);
     }
 
     .logo-full {
-        color: #ccc;
+        color: #b3b3cc;
+    }
+
+    h1 {
+        color: #fa6d5a;
+        text-shadow: 1px 1px 0 #aa3a2a, 0 0 10px rgba(255, 107, 107, 0.2);
     }
 
     .input-label {
-        color: #eee;
+        color: #e0e0ef;
     }
 
     .textarea-field {
-        background-color: #444;
-        color: #fff;
-        border-color: #666;
+        background-color: #23232d;
+        color: #e0e0ef;
+        border-color: #3f4f6b;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .textarea-field:focus {
+        border-color: #5c7fc7;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 8px rgba(92, 127, 199, 0.4);
+        outline: none;
+    }
+
+    .textarea-field::placeholder {
+        color: #6f7285;
+    }
+
+    .submit-btn {
+        background-color: #5c7fc7;
+        box-shadow: 0 3px 0 #3a5a9f;
+        transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #4a6db5;
+        transform: translateY(1px);
+        box-shadow: 0 2px 0 #3a5a9f;
+    }
+
+    .submit-btn:active {
+        transform: translateY(3px);
+        box-shadow: none;
+        background-color: #3a5a9f;
     }
 
     .progress-bar {
-        background-color: #444;
-        border-color: #555;
+        background-color: #23232d;
+        border-color: #3f4f6b;
+        box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.3);
+    }
+
+    .progress-label {
+        color: #b3b3cc;
+    }
+
+    .progress-fill-1 {
+        background: linear-gradient(to right, #c165dd, #e66aed);
+    }
+
+    .progress-fill-2 {
+        background: linear-gradient(to right, #f8b94a, #ffce44);
+    }
+
+    .progress-fill-3 {
+        background: linear-gradient(to right, #4778d9, #49aeff);
+    }
+
+    .progress-fill::after {
+        background: repeating-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.1) 10px,
+            rgba(255, 255, 255, 0) 10px,
+            rgba(255, 255, 255, 0) 20px
+        );
     }
 
     .progress-description {
-        background-color: #444;
-        color: #ddd;
+        background-color: #23232d;
+        color: #a0a0b8;
+        border-radius: 8px;
+        border-left: 3px solid;
+    }
+
+    .description-1 {
+        border-left-color: #e66aed;
+    }
+
+    .description-2 {
+        border-left-color: #ffce44;
+    }
+
+    .description-3 {
+        border-left-color: #49aeff;
     }
 
     .summary-section {
-        background-color: #444;
-        border-color: #555;
+        background-color: #23232d;
+        border: 1px solid #3f4f6b;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
     }
 
     .summary-title {
-        color: #ddd;
+        color: #e0e0ef;
     }
 
     .summary-text {
-        color: #ccc;
+        color: #b3b3cc;
+    }
+
+    .summary-text strong {
+        color: #ffffff;
+    }
+
+    /* Добавляем стили для эмодзи, чтобы они выделялись в темной теме */
+    .emoji {
+        filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+    }
+
+    /* Анимация пульсации для кнопки в темной теме */
+    @keyframes pulse-dark {
+        0% {
+            box-shadow: 0 3px 0 #3a5a9f, 0 0 0 rgba(92, 127, 199, 0);
+        }
+        70% {
+            box-shadow: 0 3px 0 #3a5a9f, 0 0 10px rgba(92, 127, 199, 0.3);
+        }
+        100% {
+            box-shadow: 0 3px 0 #3a5a9f, 0 0 0 rgba(92, 127, 199, 0);
+        }
+    }
+
+    .submit-btn:hover {
+        animation: pulse-dark 2s infinite;
     }
 }
