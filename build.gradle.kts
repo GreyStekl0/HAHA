@@ -1,14 +1,14 @@
 import io.ktor.plugin.features.DockerImageRegistry
 
 plugins {
-    kotlin("jvm") version "2.1.20"
-    id("io.ktor.plugin") version "3.1.2"
-    kotlin("plugin.serialization") version "2.1.20"
+    kotlin("jvm") version "2.1.21"
+    id("io.ktor.plugin") version "3.1.3"
+    kotlin("plugin.serialization") version "2.1.21"
     application
 }
 
 group = "com.github.stekl0"
-version = "1.0.4"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -31,11 +31,11 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:1.5.18")
     testImplementation("io.ktor:ktor-server-test-host")
     testImplementation("io.ktor:ktor-client-mock")
-    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
-    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
-    testImplementation("io.kotest:kotest-property:5.9.1")
-    testImplementation("io.kotest.extensions:kotest-assertions-ktor:2.0.0")
-    testImplementation("io.mockk:mockk:1.14.0")
+    testImplementation(platform("io.kotest:kotest-bom:5.9.1"))
+    testImplementation("io.kotest:kotest-runner-junit5")
+    testImplementation("io.kotest:kotest-assertions-core")
+    testImplementation("io.kotest:kotest-property")
+    testImplementation("io.mockk:mockk:1.14.2")
     testImplementation("io.insert-koin:koin-test-junit5")
 }
 
