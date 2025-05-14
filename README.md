@@ -59,11 +59,12 @@ GET /api/evaluate?joke=Текст_шутки
 ```sh
 ./gradlew buildImage
 docker load -i build/jib-image.tar
-docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:80 haha-app # DNS_SERVER опционально
+docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:8080 haha-app # DNS_SERVER опционально
 ```
 ### или
 ```sh
-docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:80 ghcr.io/greystekl0/haha:1.0.3 # DNS_SERVER опционально
+docker pull ghcr.io/greystekl0/haha
+docker run -e API_KEY=your_api_key -e DNS_SERVER=your_dns_server -p 80:8080 ghcr.io/greystekl0/haha # DNS_SERVER опционально
 ```
 
 ## Структура проекта

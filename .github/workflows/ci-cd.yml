@@ -5,11 +5,11 @@ permissions:
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   test:
-    name: Тестирование
+    name: Testing
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -35,10 +35,6 @@ jobs:
     env:
       GHCR_USERNAME: ${{ github.repository_owner }}
       GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }}
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-    outputs:
-      app-version: ${{ steps.get-version.outputs.version }}
 
     steps:
       - name: Checkout code
@@ -54,22 +50,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Get project version
-        id: get-version
-        run: |
-          VERSION=$(grep 'version =' build.gradle.kts | awk -F\" '{print $2}')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
       - name: Setup Java 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-
-      - name: Debug GHCR creds
-        run: |
-          echo "GHCR_USERNAME=$GHCR_USERNAME"
-          echo "GHCR_TOKEN=${GHCR_TOKEN:0:4}••••"
 
       - name: Build and publish Docker image
         run: ./gradlew publishImage --no-daemon
@@ -89,9 +74,11 @@ jobs:
             docker stop haha-app || true
             docker rm haha-app || true
             docker run \
-              -d \
-              --name haha-app \
-              -p 80:8080 \
-              -e API_KEY="${{ secrets.API_KEY }}" \
-              -e DNS_SERVER="${{ secrets.DNS_SERVER }}" \
-              ghcr.io/greystekl0/haha:${{ needs.build-and-push.outputs.app-version }}
+            --pull always \
+            -d \
+            --name haha-app \
+            --restart unless-stopped \
+            -p 80:8080 \
+            -e API_KEY="${{ secrets.API_KEY }}" \
+            -e DNS_SERVER="${{ secrets.DNS_SERVER }}" \
+            ghcr.io/greystekl0/haha
